@@ -87,6 +87,7 @@ private extension NewObjectViewController {
             $0.width.equalTo(typeTF.snp.width)
             $0.centerX.equalTo(typeTF.snp.centerX)
             $0.height.equalTo(100)
+            
         }
     }
     
