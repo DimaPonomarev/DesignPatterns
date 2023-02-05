@@ -12,14 +12,30 @@
 import UIKit
 import SnapKit
 
-final class TableViewController: UIViewController {
+protocol TableViewProtocol: UIViewController {
+    var presenter: TableviewPresenterProtocol? {get set}
+}
+
+class TableViewController: UIViewController, TableViewProtocol {
     
     //  MARK: - UI properties
+    var presenter: TableviewPresenterProtocol?
     
     private let tableview = UITableView()
     var behaviourArray: [Model] = []
     var creationalArray: [Model] = []
     var structuralArray: [Model] = []
+    
+    //    MARK: - Init
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        setup()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     //  MARK: - View lifecycle
     
@@ -35,6 +51,12 @@ final class TableViewController: UIViewController {
 //  MARK: - Extension TableViewController
 
 private extension TableViewController {
+    
+    
+    func setup() {
+        let assembly = TableViewAssembly()
+        assembly.construct(tableView: self)
+    }
     
     //  MARK: - addViews
     
@@ -74,7 +96,7 @@ private extension TableViewController {
     @objc func makeNewCell() {
         let secondView = NewObjectViewController()
         secondView.delegateNewPattern = self
-        self.navigationController?.pushViewController(secondView, animated: true)
+        navigationController?.pushViewController(secondView, animated: true)
     }
     
     //  MARK: - divideArray

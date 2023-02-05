@@ -21,7 +21,7 @@ final class DetailViewController: UIViewController {
     private let contentView = UIView()
     private var item: Model
     private let textView = UITextView()
-    var delegate: DetailViewControllerDelegate?
+    var delegate: DetailViewControllerDelegate!
     
     //   MARK: - Init
     
